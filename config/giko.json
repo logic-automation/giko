@@ -1,0 +1,20 @@
+{
+    "broadcaster": "Giko",
+    "whitelist": [],
+    "lag": 0,
+    "dynamis": [{"day": "wednesday", "gmt": "22:00"}, {"day": "sunday", "gmt": "20:00"}],
+    "alerts": {
+        "dynamis": ["1h", "30m", "15m", "5m", "0s"],
+        "monsters": {
+            "adamantoise": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "behemoth": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "cerberus": ["30m", "15m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "fafnir": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "hydra": ["30m", "15m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "jormungand": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "khimaira": ["30m", "15m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "tiamat": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"],
+            "vrtra": ["1h", "20m", "5m", "3m", "1m", "10s", "5s", "-5s"]
+        }
+    }
+}
