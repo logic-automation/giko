@@ -1,8 +1,6 @@
 # giko
 
-Dependencies: 
-giko-cache
-giko-common
+Dependencies: giko-cache, giko-common
 
 This is the broadcaster addon. 
 
