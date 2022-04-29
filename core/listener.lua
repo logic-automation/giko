@@ -139,7 +139,7 @@ listener.reply['sync'] = function(username, input)
 
         l = l + string.len(tod)
 
-        if l <= 125 and n ~= #tods then
+        if l <= 125 then
             table.insert(t, tod)
         else
             table.insert(tell, string.format('[ToD]%s', table.concat(t, '')))            
