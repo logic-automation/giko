@@ -1,7 +1,5 @@
 # giko
 
-Dependencies: giko-cache, giko-common
-
 This is the broadcaster addon. 
 
 It listen to chat commands in tells and linkshell (@giko) to record and spread informations about monitored monster (adamantoise, behemoth, cerberus, fafnir, hydra, jormungand, khimaira, tiamat, vrtra) tods and dynamis times.
@@ -13,3 +11,5 @@ It listen to chat commands in tells and linkshell (@giko) to record and spread i
 @giko get-tod name
 
 @giko get-day name
+
+Dependencies: giko-cache, giko-common
