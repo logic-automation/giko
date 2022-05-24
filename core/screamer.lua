@@ -14,9 +14,9 @@ local get_scream_dynamis = function(a)
 end
 
 local get_scream_monster = function(mob, n, a, i)
-
-    if i == #config.alerts.monsters[mob.names.nq[1]] - 1 then return string.format('~= %s window is open! =~', mob.names.nq[1]) end
-    if i == #config.alerts.monsters[mob.names.nq[1]] then return string.format('~= %s window is closed =~', mob.names.nq[1]) end
+                  
+    if i == #config.alerts.monsters[string.lower(mob.names.nq[1])] - 1 then return string.format('~= %s window is open! =~', mob.names.nq[1]) end
+    if i == #config.alerts.monsters[string.lower(mob.names.nq[1])] then return string.format('~= %s window is closed =~', mob.names.nq[1]) end
     if string.find(a, '^%d') and n ~= #mob.windows then return string.format('~= %s window in %s =~', mob.names.nq[1], a) end
     if string.find(a, '^%d') and n == #mob.windows then return string.format('~= %s force pop in %s =~', mob.names.nq[1], a) end
 
@@ -48,7 +48,7 @@ screamer.dynamis = function()
                 for i,alert in ipairs(config.alerts.dynamis) do
 
                     if os.difftime(d_time - common.to_seconds(alert), os.time()) > 0 then
-                        ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert) - config.lag, os.time()), 1, function() chat.linkshell(get_scream_dynamis(alert)) if i == #config.alerts.dynamis then screamer.dynamis() end end)
+                        ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert), os.time()), 1, function() chat.linkshell(get_scream_dynamis(alert)) if i == #config.alerts.dynamis then screamer.dynamis() end end)
                         d_set = true   
                     end
 
@@ -86,7 +86,7 @@ screamer.monsters = function()
                 for i,a in ipairs(alerts) do
 
                     if os.difftime(time - common.to_seconds(a), os.time()) > 0 then
-                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.lag, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, n, a, i)) end)
+                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, n, a, i)) end)
                     else
                         ashita.timer.remove_timer(string.format('%s-%s-%s', mob.names.nq[1], n, i)) 
                     end
