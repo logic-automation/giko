@@ -17,7 +17,7 @@ local get_scream_monster = function(mob, n, a, i)
                   
     if i == #config.alerts.monsters[string.lower(mob.names.nq[1])] - 1 then return string.format('~= %s window is open! =~', mob.names.nq[1]) end
     if i == #config.alerts.monsters[string.lower(mob.names.nq[1])] then return string.format('~= %s window is closed =~', mob.names.nq[1]) end
-    if string.find(a, '^%d') and n ~= #mob.windows then return string.format('~= %s window in %s =~', mob.names.nq[1], a) end
+    if string.find(a, '^%d') and n ~= #mob.windows then return string.format('~= W%s - %s in %s =~', n, mob.names.nq[1], a) end
     if string.find(a, '^%d') and n == #mob.windows then return string.format('~= %s force pop in %s =~', mob.names.nq[1], a) end
 
 end
