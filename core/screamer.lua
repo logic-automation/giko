@@ -33,6 +33,7 @@ screamer.dynamis = function()
 
     local time = os.time()
     local dst  = os.date('*t').isdst
+    local grc  = 2
     local y, m, d, h, m, s, a, d_time, d_set
 
     while true do
@@ -48,7 +49,7 @@ screamer.dynamis = function()
                 for i,alert in ipairs(config.alerts.dynamis) do
 
                     if os.difftime(d_time - common.to_seconds(alert), os.time()) > 0 then
-                        ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert), os.time()), 1, function() chat.linkshell(get_scream_dynamis(alert)) if i == #config.alerts.dynamis then screamer.dynamis() end end)
+                        ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert) - grc, os.time()), 1, function() chat.linkshell(get_scream_dynamis(alert), os.time() + grc) if i == #config.alerts.dynamis then screamer.dynamis() end end)
                         d_set = true   
                     end
 
@@ -74,6 +75,7 @@ screamer.monsters = function()
 
         local tod = death.get_tod(key)
         local mob = monster.get(key)
+        local grc = 2
     
         if tod ~= nil and mob ~= nil then
         
@@ -86,7 +88,7 @@ screamer.monsters = function()
                 for i,a in ipairs(alerts) do
 
                     if common.to_seconds(a) < common.to_seconds(w) and os.difftime(time - common.to_seconds(a), os.time()) > 0 then
-                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, n, a, i)) end)
+                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset - grc, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, n, a, i), os.time() + grc) end)
                     else
                         ashita.timer.remove_timer(string.format('%s-%s-%s', mob.names.nq[1], n, i)) 
                     end
