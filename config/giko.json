@@ -2,7 +2,7 @@
     "broadcaster": "Giko",
     "whitelist": [],
     "offset": 5,
-    "dynamis": [{"day": "wednesday", "gmt": "22:00"}, {"day": "sunday", "gmt": "20:00"}],
+    "dynamis": [{"day": "wednesday", "gmt": "23:00"}, {"day": "sunday", "gmt": "21:00"}],
     "alerts": {
         "dynamis": ["1h", "30m", "15m", "5m", "0s"],
         "monsters": {
