@@ -85,7 +85,7 @@ screamer.monsters = function()
 
                 for i,a in ipairs(alerts) do
 
-                    if os.difftime(time - common.to_seconds(a), os.time()) > 0 then
+                    if common.to_seconds(a) < common.to_seconds(w) and os.difftime(time - common.to_seconds(a), os.time()) > 0 then
                         ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, n, a, i)) end)
                     else
                         ashita.timer.remove_timer(string.format('%s-%s-%s', mob.names.nq[1], n, i)) 
