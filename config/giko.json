@@ -2,20 +2,17 @@
     "broadcaster": "Giko",
     "whitelist": [],
     "offset": 5,
-    "dynamis": [{"day": "wednesday", "gmt": "23:00"}, {"day": "sunday", "gmt": "21:00"}],
-    "alerts": {
-        "dynamis": ["1h", "30m", "15m", "5m", "0s"],
-        "monsters": {
-            "adamantoise": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "behemoth": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "fafnir": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "cerberus": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "king arthro": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],            
-            "hydra": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "khimaira": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "jormungand": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "tiamat": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"],
-            "vrtra": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]
-        }
+    "dynamis": {"enabled": true, "schedule": [{"day": "wednesday", "gmt": "23:00"}, {"day": "sunday", "gmt": "21:00"}], "alerts": ["1h", "30m", "15m", "5m", "0s"]},
+    "monsters": {
+        "adamantoise": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "behemoth": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "fafnir": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "cerberus": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "king arthro": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},            
+        "hydra": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "khimaira": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "jormungand": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "tiamat": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
+        "vrtra": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]}
     }
 }

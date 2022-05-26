@@ -30,7 +30,7 @@ end
 
 listener.channel.linkshell = function(input)
 
-    local replies = {'sync', 'get-tod', 'set-tod', 'get-day', 'set-day', 'get-window'}
+    local replies = {'sync', 'enable', 'disable', 'get-tod', 'set-tod', 'get-day', 'set-day'}
     local username = string.sub(input, string.find(input, '%a+'))
     local tell = {}
     local linkshell = {}
@@ -66,7 +66,7 @@ end
 
 listener.channel.tell = function(input)
 
-    local replies = {'sync', 'get-tod', 'set-tod', 'get-day', 'set-day', 'get-window'}
+    local replies = {'sync', 'enable', 'disable', 'get-tod', 'set-tod', 'get-day', 'set-day'}
     local username = string.sub(input, string.find(input, '%a+'))
     local tell = {}
     local linkshell = {}
@@ -287,30 +287,55 @@ listener.reply['set-day'] = function(username, input)
 
 end
 
-listener.reply['get-window'] = function(username, input)
+listener.reply['enable'] = function(username, input)
    
-    local tell   = {}
-    local tokens = common.split(input, ' ')
+    local linkshell = {}
+    local tokens    = common.split(input, ' ')
 
     for n, token in pairs(tokens) do
         for key,mob in ipairs(monster.notorious) do
             for n,name in ipairs(common.flatten(mob.names)) do    
                 if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
                         
-                    local win = death.get_window(mob.names.nq[1])
+                   config.monsters[string.lower(mob.names.nq[1])].enabled = true
+                   config.save()     
+                    
+                   table.insert(linkshell, string.format('[Alerts][%s][Enabled]', mob.names.nq[1]))
 
-                    if win ~= nil then                           
-                        table.insert(tell, string.format("[Window][%d][%s][%s]", win.count, win.name, common.gmt_to_local_date(win.time)))
-                    else                    
-                        table.insert(tell, string.format('[Window][%d][%s]', mob.names.nq[1], 'Window unknown'))
-                    end
+                   screamer.reload()         
 
                 end
             end
         end
     end
 
-    return tell, {}
+    return {}, linkshell
+
+end
+
+listener.reply['disable'] = function(username, input)
+   
+    local linkshell = {}
+    local tokens    = common.split(input, ' ')
+
+    for n, token in pairs(tokens) do
+        for key,mob in ipairs(monster.notorious) do
+            for n,name in ipairs(common.flatten(mob.names)) do    
+                if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
+                        
+                   config.monsters[string.lower(mob.names.nq[1])].enabled = false
+                   config.save()     
+                    
+                   table.insert(linkshell, string.format('[Alerts][%s][Disabled]', mob.names.nq[1]))
+                   
+                   screamer.reload()  
+
+                end
+            end
+        end
+    end
+
+    return {}, linkshell
 
 end
 
