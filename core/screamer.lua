@@ -33,7 +33,7 @@ screamer.dynamis = function()
 
     local time = os.time()
     local dst  = os.date('*t').isdst
-    local grc  = 2
+    local grc  = 5
     local y, m, d, h, m, s, a, d_time, d_set
 
     while true do
@@ -75,7 +75,7 @@ screamer.monsters = function()
 
         local tod = death.get_tod(key)
         local mob = monster.get(key)
-        local grc = 2
+        local grc = 5
     
         if tod ~= nil and mob ~= nil then
         
