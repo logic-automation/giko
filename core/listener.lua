@@ -247,7 +247,7 @@ listener.reply['get-day'] = function(username, input)
                     local win = death.get_window(mob.names.nq[1])
 
                     if win ~= nil then 
-                        table.insert(tell, string.format("[Day][%s][%s]", win.name, win.day or 1)) 
+                        table.insert(tell, string.format("[Day][%s][%s]", win.name, win.day or 'No HQ')) 
                     else                    
                         table.insert(tell, string.format('[Day][%s][%s]', mob.names.nq[1], 'ToD unknown')) 
                     end
