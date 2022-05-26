@@ -4,6 +4,12 @@ This is the broadcaster addon.
 
 Listens to chat commands in tells and linkshell (@giko) to record and give informations about monitored monster (adamantoise, behemoth, cerberus, fafnir, hydra, jormungand, khimaira, tiamat, vrtra) tods and dynamis times.
 
+@giko sync
+
+@giko enable name
+
+@giko disable name
+
 @giko set-tod name now | yyyy-mm-dd hh:ii:ss -0000
 
 @giko set-day name day
