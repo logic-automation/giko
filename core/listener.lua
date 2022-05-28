@@ -220,7 +220,9 @@ listener.reply['set-tod'] = function(username, input)
                     end
                 end
             else
-                table.insert(tell, string.format('Unable to save ToD, incompatible with previous ToD of [%s]. Use --force to overwrite.', common.gmt_to_local_date(death.get_tod(token).gmt)))
+                if math.abs(time - common.gmt_to_local_time(death.get_tod(token).gmt)) > 2 then
+                    table.insert(tell, string.format('Unable to save ToD, incompatible with previous ToD of [%s]. Use --force to overwrite.', common.gmt_to_local_date(death.get_tod(token).gmt)))
+                end
             end
 
         end
