@@ -8,7 +8,7 @@ local screamer = {}
 
 local get_scream_dynamis = function(a)
 
-    if a == '0s' then return string.format('~= %s Dynamis is starting now! =~', mob.names.nq[1]) end
+    if a == '0s' then return string.format('~= Dynamis is starting now! =~') end
     if string.find(a, '^%d') then return string.format('~= Dynamis is starting in %s =~', a) end
 
 end
