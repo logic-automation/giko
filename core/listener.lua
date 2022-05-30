@@ -9,7 +9,6 @@ local listener = { channel = {}, reply = {} }
 
 local channel   = {tell = tonumber(0xC), linkshell_out = tonumber(0xE), linkshell_in = tonumber(0x6)}
 local whitelist = string.format('%s\\..\\giko-cache\\cache\\giko.whitelist.csv', _addon.path)
-local next_t    = os.time()
 
 listener.listen = function(mode, input, m_mode, m_message, blocked)
 
@@ -51,13 +50,11 @@ listener.channel.linkshell = function(input)
         end
 
         for k,v in pairs(tell) do
-            next_t = math.max(os.time() + 2, next_t + 2)
-            ashita.timer.create(next_t, next_t - os.time(), 1, function() chat.tell(username, v) end)
+            chat.tell(username, v)
         end
 
         for k,v in pairs(linkshell) do
-            next_t = math.max(os.time() + 2, next_t + 2)
-            ashita.timer.create(next_t, next_t - os.time(), 1, function() chat.linkshell(v) end)
+            chat.linkshell(v)
         end
         
     end
@@ -83,13 +80,11 @@ listener.channel.tell = function(input)
         end
 
         for k,v in pairs(tell) do
-            next_t = math.max(os.time() + 2, next_t + 2)
-            ashita.timer.create(next_t, next_t - os.time(), 1, function() chat.tell(username, v) end)
+            chat.tell(username, v)
         end
 
         for k,v in pairs(linkshell) do
-            next_t = math.max(os.time() + 2, next_t + 2)
-            ashita.timer.create(next_t, next_t - os.time(), 1, function() chat.linkshell(v) end)
+            chat.linkshell(v)
         end
 
     end    
