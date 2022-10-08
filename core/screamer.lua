@@ -8,20 +8,20 @@ local screamer = {}
 
 local get_scream_dynamis = function(a)
 
-    if a == '0s' then return string.format('~= Dynamis is starting now! =~') end
-    if string.find(a, '^%d') then return string.format('~= Dynamis is starting in %s =~', a) end
+    if a == '0s' then return string.format('☆★☆ Dynamis is starting now! ☆★☆') end
+    if string.find(a, '^%d') then return string.format('☆★☆ Dynamis is starting in %s ☆★☆', a) end
 
 end
 
 local get_scream_monster = function(mob, d, n, a, i)
       
-    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 1 then return string.format('~= %s window is open! =~', mob.names.nq[1]) end
-    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 1 then return string.format('~= %s window is open! =~', mob.names.nq[1]) end
+    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 1 then return string.format('☆★☆ %s window is open! ☆★☆', mob.names.nq[1]) end
+    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 0 then return string.format('★☆★ %s window is close ★☆★', mob.names.nq[1]) end
 
-    if string.find(a, '^%d') and d ~= nil and n ~= #mob.windows.at then return string.format('~= Day %s %s window %s in %s =~', d, mob.names.nq[1], n, a) end
-    if string.find(a, '^%d') and d == nil and n ~= #mob.windows.at then return string.format('~= %s window %s in %s =~', mob.names.nq[1], n, a) end
-    if string.find(a, '^%d') and d ~= nil and n == #mob.windows.at then return string.format('~= Day %s %s force pop in %s =~', d, mob.names.nq[1], a) end
-    if string.find(a, '^%d') and d == nil and n == #mob.windows.at then return string.format('~= %s force pop in %s =~', mob.names.nq[1], a) end
+    if string.find(a, '^%d') and d ~= nil and n ~= #mob.windows.at then return string.format('☆★☆ Day %s %s window %s in %s ☆★☆', d, mob.names.nq[1], n, a) end
+    if string.find(a, '^%d') and d == nil and n ~= #mob.windows.at then return string.format('☆★☆ %s window %s in %s ☆★☆', mob.names.nq[1], n, a) end
+    if string.find(a, '^%d') and d ~= nil and n == #mob.windows.at then return string.format('☆★☆ Day %s %s force pop in %s ☆★☆', d, mob.names.nq[1], a) end
+    if string.find(a, '^%d') and d == nil and n == #mob.windows.at then return string.format('☆★☆ %s force pop in %s ☆★☆', mob.names.nq[1], a) end
 
 end
 
