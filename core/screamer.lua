@@ -54,7 +54,7 @@ screamer.dynamis = function()
                     if os.difftime(d_time - common.to_seconds(alert), os.time()) > 0 then
 
                         if config.dynamis.enabled then
-                            ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert) - grc, os.time()), 1, function() chat.echo(get_scream_dynamis(alert), os.time() + grc) if i == #config.dynamis.alerts then screamer.dynamis() end end)
+                            ashita.timer.create(string.format('dynamis-%s-%s-%s-%s', m, d, k, i), os.difftime(d_time - common.to_seconds(alert) - grc, os.time()), 1, function() chat.linkshell(get_scream_dynamis(alert), os.time() + grc) if i == #config.dynamis.alerts then screamer.dynamis() end end)
                         else
                             ashita.timer.remove_timer(string.format('dynamis-%s-%s-%s-%s', m, d, k, i))
                         end
@@ -97,7 +97,7 @@ screamer.monsters = function()
                 for i,a in ipairs(conf.alerts) do
 
                     if conf.enabled and common.to_seconds(a) < common.to_seconds(w) and os.difftime(time - common.to_seconds(a), os.time()) > 0 then
-                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset - grc, os.time()), 1, function() chat.echo(get_scream_monster(mob, mob.names.hq ~= nil and tod.day + 1 or nil, n, a, i), os.time() + grc) end)
+                        ashita.timer.create(string.format('%s-%s-%s', mob.names.nq[1], n, i), os.difftime(time - common.to_seconds(a) - config.offset - grc, os.time()), 1, function() chat.linkshell(get_scream_monster(mob, mob.names.hq ~= nil and tod.day + 1 or nil, n, a, i), os.time() + grc) end)
                     else
                         ashita.timer.remove_timer(string.format('%s-%s-%s', mob.names.nq[1], n, i)) 
                     end
