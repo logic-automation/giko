@@ -100,15 +100,7 @@ listener.reply['sync'] = function(username, input)
     local l = 0
     local t = {}
 
-    for key,mob in ipairs(monster.notorious) do  
-        for n,set in ipairs(mob.sets) do  
-            if not common.in_array(sets, set) then
-                table.insert(sets, set)
-            end
-        end
-    end
-
-    for n,set in ipairs(sets) do   
+    for n,set in ipairs(config.sets) do   
 
         local v_tod = ''
 
@@ -233,7 +225,6 @@ end
 listener.reply['get-day'] = function(username, input)
    
     local tell   = {}
-    local sets   = {}
     local tokens = common.split(input, ' ')
 
     for n, token in pairs(tokens) do

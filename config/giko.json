@@ -1,8 +1,9 @@
 {
     "broadcaster": "Giko",
     "whitelist": [],
-    "offset": 1,
+    "sets": ["Kings", "CoP", "ToAU"],
     "dynamis": {"enabled": true, "schedule": [{"day": "wednesday", "gmt": "23:00"}, {"day": "sunday", "gmt": "21:00"}], "alerts": ["1h", "30m", "15m", "5m", "0s"]},
+    "offset": 1,
     "monsters": {
         "adamantoise": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
         "behemoth": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
