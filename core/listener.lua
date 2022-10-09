@@ -172,7 +172,9 @@ listener.reply['set-tod'] = function(username, input)
    
     local tell = {}
     local linkshell = {}
-    local Y, m, d, H, M, S, z = string.match(input, '(%d%d%d%d)-(%d%d)-(%d%d) (%d%d):(%d%d):(%d%d)%s([%-%+]%d%d%d%d)')
+    local Y, m, d, H, M, S, z, D = string.match(input, '(%d%d%d%d)-(%d%d)-(%d%d) (%d%d):(%d%d):(%d%d)%s([%-%+]%d%d%d%d)')
+    local D                      = string.match(input, '%d%d%d%d%-%d%d%-%d%d%s%d%d:%d%d:%d%d%s[%-%+]%d%d%d%d%s(%d+)')
+            
     local time, loc_date, gmt_date
 
     if string.find(input, 'now') then
@@ -199,7 +201,7 @@ listener.reply['set-tod'] = function(username, input)
                 for key,mob in ipairs(monster.notorious) do
                     for n,name in ipairs(common.flatten(mob.names)) do  
                         if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
-                            if death.set_tod(name, gmt_date) then
+                            if death.set_tod(name, gmt_date, D) then
                                 table.insert(linkshell, string.format('[ToD][%s][%s]%s', common.in_array(mob.names.nq, name) and mob.names.nq[1] or mob.names.hq[1], loc_date, death.get_tod(name).day and string.format('[%s]', common.in_array(mob.names.nq, name) and death.get_tod(name).day or 0) or ''))
                                 screamer.reload()                    
                             end

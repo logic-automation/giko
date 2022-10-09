@@ -6,22 +6,26 @@ local monster  = require('lib.giko.monster')
 local chat     = require('lib.giko.chat')
 local screamer = {}
 
+local get_scream_banner = function(s, c)
+    return string.char(129, c) .. ' ' .. s .. ' ' .. string.char(129, c)
+end
+
 local get_scream_dynamis = function(a)
 
-    if a == '0s' then return string.format('☆★☆ Dynamis is starting now! ☆★☆') end
-    if string.find(a, '^%d') then return string.format('☆★☆ Dynamis is starting in %s ☆★☆', a) end
+    if a == '0s' then return get_scream_banner(string.format('Dynamis is starting now!'), 154) end
+    if string.find(a, '^%d') then return get_scream_banner(string.format('Dynamis is starting in %s', a), 228) end
 
 end
 
 local get_scream_monster = function(mob, d, n, a, i)
       
-    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 1 then return string.format('☆★☆ %s window is open! ☆★☆', mob.names.nq[1]) end
-    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 0 then return string.format('★☆★ %s window is close ★☆★', mob.names.nq[1]) end
+    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 1 then return get_scream_banner(string.format('%s window is open!', mob.names.nq[1]), 154) end
+    if i == #config.monsters[string.lower(mob.names.nq[1])].alerts - 0 then return get_scream_banner(string.format('%s window is closed', mob.names.nq[1]), 166) end
 
-    if string.find(a, '^%d') and d ~= nil and n ~= #mob.windows.at then return string.format('☆★☆ Day %s %s window %s in %s ☆★☆', d, mob.names.nq[1], n, a) end
-    if string.find(a, '^%d') and d == nil and n ~= #mob.windows.at then return string.format('☆★☆ %s window %s in %s ☆★☆', mob.names.nq[1], n, a) end
-    if string.find(a, '^%d') and d ~= nil and n == #mob.windows.at then return string.format('☆★☆ Day %s %s force pop in %s ☆★☆', d, mob.names.nq[1], a) end
-    if string.find(a, '^%d') and d == nil and n == #mob.windows.at then return string.format('☆★☆ %s force pop in %s ☆★☆', mob.names.nq[1], a) end
+    if string.find(a, '^%d') and d ~= nil and n ~= #mob.windows.at then return get_scream_banner(string.format('D%s - W%s - %s in %s', d, n, mob.names.nq[1], a), 228) end
+    if string.find(a, '^%d') and d == nil and n ~= #mob.windows.at then return get_scream_banner(string.format('W%s - %s in %s', n, mob.names.nq[1], a), 228) end
+    if string.find(a, '^%d') and d ~= nil and n == #mob.windows.at then return get_scream_banner(string.format('D%s - %s force pop in %s', d, mob.names.nq[1], a), 228) end
+    if string.find(a, '^%d') and d == nil and n == #mob.windows.at then return get_scream_banner(string.format('%s force pop in %s', mob.names.nq[1], a), 228) end
 
 end
 
