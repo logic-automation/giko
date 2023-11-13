@@ -87,7 +87,7 @@ screamer.monsters = function()
         
             local time = common.gmt_to_local_time(tod.gmt)
             
-            for n,w in pairs(mob.windows) do
+            for n,w in pairs(mob.windows.at) do
 
                 time = time + common.to_seconds(w)
 
