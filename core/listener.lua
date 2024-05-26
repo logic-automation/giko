@@ -8,6 +8,7 @@ local chat     = require('lib.giko.chat')
 local listener = { channel = {}, reply = {} }
 
 local channel   = {tell = tonumber(0xC), linkshell_out = tonumber(0xE), linkshell_in = tonumber(0x6)}
+local userlist  = string.format('%s\\..\\giko-cache\\cache\\giko.userlist.csv', _addon.path)
 local whitelist = string.format('%s\\..\\giko-cache\\cache\\giko.whitelist.csv', _addon.path)
 
 listener.listen = function(mode, input, m_mode, m_message, blocked)
@@ -92,7 +93,7 @@ listener.channel.tell = function(input)
 end
    
 listener.reply['sync'] = function(username, input)
-     
+     	 
     local tell = {}
     local sets = {}
     local tods = {}
@@ -100,15 +101,11 @@ listener.reply['sync'] = function(username, input)
     local l = 0
     local t = {}
 
-    for key,mob in ipairs(monster.notorious) do  
-        for n,set in ipairs(mob.sets) do  
-            if not common.in_array(sets, set) then
-                table.insert(sets, set)
-            end
-        end
+    if not common.in_array_key(cache.get_all(userlist), username) then
+        cache.set(userlist, username, os.date('%Y-%m-%d %H:%M:%S', os.time()))
     end
 
-    for n,set in ipairs(sets) do   
+    for n,set in ipairs(config.sets) do   
 
         local v_tod = ''
 
@@ -180,7 +177,9 @@ listener.reply['set-tod'] = function(username, input)
    
     local tell = {}
     local linkshell = {}
-    local Y, m, d, H, M, S, z = string.match(input, '(%d%d%d%d)-(%d%d)-(%d%d) (%d%d):(%d%d):(%d%d)%s([%-%+]%d%d%d%d)')
+    local Y, m, d, H, M, S, z, D = string.match(input, '(%d%d%d%d)-(%d%d)-(%d%d) (%d%d):(%d%d):(%d%d)%s([%-%+]%d%d%d%d)')
+    local D                      = string.match(input, '%d%d%d%d%-%d%d%-%d%d%s%d%d:%d%d:%d%d%s[%-%+]%d%d%d%d%s(%d+)')
+            
     local time, loc_date, gmt_date
 
     if string.find(input, 'now') then
@@ -192,7 +191,7 @@ listener.reply['set-tod'] = function(username, input)
     elseif Y and m and d and H and M and S and z ~= nil then
 
         time     = os.time({year=Y, month=m, day=d, hour=H, min=M, sec=S})
-        loc_date = os.date('%Y-%m-%d %H:%M:%S %z', time - common.offset_to_seconds(z) + common.offset_to_seconds(os.date('%z', time)))
+        loc_date = os.date('%Y-%m-%d %H:%M:%S %z', time - common.offset_to_seconds(z) + common.offset_to_seconds(os.date('%z', os.time())))
         gmt_date = os.date('%Y-%m-%d %H:%M:%S', time - common.offset_to_seconds(z))   
         
     end
@@ -206,10 +205,16 @@ listener.reply['set-tod'] = function(username, input)
             if win == nil or win.count > 1 or string.find(input, '%-%-force') then
                 for key,mob in ipairs(monster.notorious) do
                     for n,name in ipairs(common.flatten(mob.names)) do  
-                        if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
-                            if death.set_tod(name, gmt_date) then
-                                table.insert(linkshell, string.format('[ToD][%s][%s]%s', common.in_array(mob.names.nq, name) and mob.names.nq[1] or mob.names.hq[1], loc_date, death.get_tod(name).day and string.format('[%s]', common.in_array(mob.names.nq, name) and death.get_tod(name).day or 0) or ''))
-                                screamer.reload()                    
+                        if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then						
+							if death.set_tod(name, gmt_date, D) then
+                                if config.monsters[string.lower(mob.names.nq[1])].enabled then
+                                    table.insert(linkshell, string.format('[ToD][%s][%s]%s', common.in_array(mob.names.nq, name) and mob.names.nq[1] or mob.names.hq[1], loc_date, death.get_tod(name).day and string.format('[%s]', common.in_array(mob.names.nq, name) and death.get_tod(name).day or 0) or ''))
+                                    screamer.reload()
+                                else                                    
+                                    for user,t in pairs(cache.get_all(userlist)) do                                        
+                                        chat.tell(user, string.format('[ToD][%s][%s]%s', common.in_array(mob.names.nq, name) and mob.names.nq[1] or mob.names.hq[1], loc_date, death.get_tod(name).day and string.format('[%s]', common.in_array(mob.names.nq, name) and death.get_tod(name).day or 0) or ''))
+                                    end
+                                end                  
                             end
                         end
                     end
@@ -233,7 +238,6 @@ end
 listener.reply['get-day'] = function(username, input)
    
     local tell   = {}
-    local sets   = {}
     local tokens = common.split(input, ' ')
 
     for n, token in pairs(tokens) do
@@ -292,7 +296,7 @@ listener.reply['enable'] = function(username, input)
     for n, token in pairs(tokens) do
         for key,mob in ipairs(monster.notorious) do
             for n,name in ipairs(common.flatten(mob.names)) do    
-                if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
+                if common.in_array_key(config.monsters, string.lower(mob.names.nq[1])) and string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
                         
                    config.monsters[string.lower(mob.names.nq[1])].enabled = true
                    config.save()     
@@ -318,7 +322,7 @@ listener.reply['disable'] = function(username, input)
     for n, token in pairs(tokens) do
         for key,mob in ipairs(monster.notorious) do
             for n,name in ipairs(common.flatten(mob.names)) do    
-                if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
+                if common.in_array_key(config.monsters, string.lower(mob.names.nq[1])) and string.gsub(string.lower(name), '%s', '-') == string.lower(token) then
                         
                    config.monsters[string.lower(mob.names.nq[1])].enabled = false
                    config.save()     
