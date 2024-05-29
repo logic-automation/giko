@@ -1,19 +1,59 @@
 {
-    "broadcaster": "Giko",
-    "whitelist": [],
-    "sets": ["Kings", "CoP", "ToAU"],
-    "dynamis": {"enabled": true, "schedule": [{"day": "wednesday", "gmt": "23:00"}, {"day": "sunday", "gmt": "21:00"}], "alerts": ["1h", "30m", "15m", "5m", "0s"]},
-    "offset": 1,
+    "broadcaster": "Tapatio",
+    "dynamis": {
+        "alerts": [ "1h", "30m", "15m", "5m", "0s" ],
+        "enabled": true,
+        "schedule": [ {
+            "day": "wednesday",
+            "gmt": "23:00"
+        }, {
+            "day": "sunday",
+            "gmt": "21:00"
+        } ]
+    },
     "monsters": {
-        "adamantoise": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "behemoth": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "fafnir": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "cerberus": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "king arthro": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},            
-        "hydra": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "khimaira": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "jormungand": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "tiamat": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]},
-        "vrtra": {"enabled": true, "alerts": ["30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s"]}
-    }
+        "adamantoise": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "behemoth": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "cerberus": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "fafnir": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "hydra": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": false
+        },
+        "jormungand": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "khimaira": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "king arthro": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "tiamat": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        },
+        "vrtra": {
+            "alerts": [ "30m", "15m", "5m", "1m", "10s", "5s", "0s", "-10s" ],
+            "enabled": true
+        }
+    },
+    "offset": 1,
+    "sets": [ "Kings", "CoP", "ToAU" ],
+    "whitelist": [ "Stormy", "Tapatio", "Heavyboots", "Maximal" ]
 }

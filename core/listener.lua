@@ -207,7 +207,7 @@ listener.reply['set-tod'] = function(username, input)
                     for n,name in ipairs(common.flatten(mob.names)) do  
                         if string.gsub(string.lower(name), '%s', '-') == string.lower(token) then						
 							if death.set_tod(name, gmt_date, D) then
-                                if config.monsters[string.lower(mob.names.nq[1])].enabled then
+                                if config.monsters[string.lower(mob.names.nq[1])] and config.monsters[string.lower(mob.names.nq[1])].enabled then
                                     table.insert(linkshell, string.format('[ToD][%s][%s]%s', common.in_array(mob.names.nq, name) and mob.names.nq[1] or mob.names.hq[1], loc_date, death.get_tod(name).day and string.format('[%s]', common.in_array(mob.names.nq, name) and death.get_tod(name).day or 0) or ''))
                                     screamer.reload()
                                 else                                    
